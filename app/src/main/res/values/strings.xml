@@ -3,4 +3,7 @@
     <string name="welcome_to_reciipiie">Welcome to \n Reciipiie</string>
     <string name="home">Home</string>
     <string name="favourite">Favourite</string>
+    <string name="waving_hand_emoji">\uD83D\uDC4B Hey Madhur</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

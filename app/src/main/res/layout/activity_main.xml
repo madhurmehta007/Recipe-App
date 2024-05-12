@@ -14,8 +14,9 @@
         android:layout_alignParentBottom="true"
         android:clickable="true"
         app:backgroundTint="@color/white"
-        app:itemActiveIndicatorStyle="@color/orange"
-        app:itemTextColor="@color/black"
+        app:itemActiveIndicatorStyle="@color/white"
+        app:itemIconTint="@color/bottom_nav_item_colors"
+        app:itemTextColor="@color/bottom_nav_item_colors"
         app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
         app:menu="@menu/bottom_nav_menu" />
 

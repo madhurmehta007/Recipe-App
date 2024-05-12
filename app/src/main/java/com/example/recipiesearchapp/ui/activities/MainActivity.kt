@@ -10,7 +10,9 @@ import com.example.recipiesearchapp.R
 import com.example.recipiesearchapp.databinding.ActivityMainBinding
 import com.example.recipiesearchapp.ui.fragments.FavouriteFragment
 import com.example.recipiesearchapp.ui.fragments.HomeFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
