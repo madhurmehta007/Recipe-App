@@ -6,59 +6,64 @@
     android:background="@color/white">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvRecipeCard"
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_marginVertical="5dp"
         android:backgroundTint="@color/white"
+        app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/ivDishImage"
-        android:layout_width="130dp"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/login_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvDishName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="Recipe name goes here"
-        android:layout_marginStart="10dp"
-        android:maxLength="32"
-        android:textColor="@color/black"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvReadyTime"
-        app:layout_constraintStart_toEndOf="@+id/ivDishImage"
-        app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/ivDishImage"
+                android:layout_width="130dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/login_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvReadyTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:lines="1"
-        android:text="Ready in 25 min"
-        android:layout_marginStart="10dp"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:textColor="@color/neutral_gray"
-        android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@id/tvDishName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivDishImage" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tvDishName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:ellipsize="end"
+                android:maxLength="32"
+                android:maxLines="1"
+                android:text="@string/recipe_name_goes_here"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/tvReadyTime"
+                app:layout_constraintStart_toEndOf="@+id/ivDishImage"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/tvReadyTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="@string/ready_in_25_min"
+                android:textColor="@color/neutral_gray"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivDishImage"
+                app:layout_constraintTop_toBottomOf="@id/tvDishName"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

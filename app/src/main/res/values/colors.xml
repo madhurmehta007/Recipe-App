@@ -5,4 +5,6 @@
     <color name="orange">#E54900</color>
     <color name="neutral_gray">#6C6C89</color>
     <color name="light_gray">#FFFFFF</color>
+    <color name="red">#E54900</color>
+    <color name="subtle_blue">#F2F7FD</color>
 </resources>

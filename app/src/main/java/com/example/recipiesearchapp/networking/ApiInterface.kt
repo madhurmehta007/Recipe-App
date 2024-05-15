@@ -2,8 +2,10 @@ package com.example.recipiesearchapp.networking
 
 import com.example.recipiesearchapp.models.AllRecipeList
 import com.example.recipiesearchapp.models.RecipeData
+import com.example.recipiesearchapp.models.RecipeInformation
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiInterface {
@@ -13,4 +15,7 @@ interface ApiInterface {
 
     @GET("recipes/complexSearch")
     suspend fun getAllRecipes(@Query("apiKey") apiKey:String):Response<AllRecipeList>
+
+    @GET("recipes/{recipeID}/information")
+    suspend fun getRecipeInformation(@Path("recipeID") recipeID:String, @Query("apiKey") apiKey: String):Response<RecipeInformation>
 }

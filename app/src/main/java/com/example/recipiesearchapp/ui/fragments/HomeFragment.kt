@@ -87,6 +87,14 @@ class HomeFragment : Fragment() {
                 binding.rvAllRecipes.adapter = adapter
                 binding.rvAllRecipes.layoutManager = LinearLayoutManager(context)
                 adapter.notifyDataSetChanged()
+
+                allRecipeAdapter.onItemClick = {
+                    val dialog = RecipeDescriptionBottomSheet(it)
+                    dialog.isCancelable = true
+                    dialog.show(parentFragmentManager,"RecipeDescriptionBottomSheet")
+
+                }
+
             }
         })
     }

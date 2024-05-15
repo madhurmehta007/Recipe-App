@@ -17,6 +17,7 @@ val allRecipeList:MutableList<Result>
 ):
 RecyclerView.Adapter<AllRecipeAdapter.AllRecipeViewHolder>(){
 
+    var onItemClick: ((Result) -> Unit)? = null
     class AllRecipeViewHolder(val binding: ItemAllRecipeBinding, context: Context):
         RecyclerView.ViewHolder(binding.root){
 
@@ -35,6 +36,10 @@ RecyclerView.Adapter<AllRecipeAdapter.AllRecipeViewHolder>(){
 
         Picasso.get().load(recipe.image).into(holder.binding.ivDishImage)
         holder.binding.tvDishName.text = recipe.title
+
+        holder.binding.cvRecipeCard.setOnClickListener {
+            onItemClick?.invoke(recipe)
+        }
 
     }
 
