@@ -20,4 +20,7 @@ class Repository @Inject constructor(private val apiInterface: ApiInterface) {
         return apiInterface.getRecipeInformation(recipeID,apiKey)
     }
 
+    suspend fun getSearchResult(apiKey: String,query:String): Response<AllRecipeList> {
+        return apiInterface.getSearchResult(apiKey,query)
+    }
 }

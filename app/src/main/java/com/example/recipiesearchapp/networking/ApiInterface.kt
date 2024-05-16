@@ -18,4 +18,7 @@ interface ApiInterface {
 
     @GET("recipes/{recipeID}/information")
     suspend fun getRecipeInformation(@Path("recipeID") recipeID:String, @Query("apiKey") apiKey: String):Response<RecipeInformation>
+
+    @GET("recipes/complexSearch")
+    suspend fun getSearchResult(@Query("apiKey") apiKey:String, @Query("query") query:String):Response<AllRecipeList>
 }

@@ -49,8 +49,6 @@ class HomeFragment : Fragment() {
             cvRecipeSearch.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
             }
-
-
         }
     }
 
@@ -78,7 +76,11 @@ class HomeFragment : Fragment() {
             val allRecipeData:MutableList<Result> = it.body()?.results as MutableList<Result>
 
             if (allRecipeData.isNotEmpty()){
-                allRecipeAdapter = AllRecipeAdapter(requireContext(),allRecipeData)
+                allRecipeAdapter = AllRecipeAdapter(requireContext(),allRecipeData, onItemClick = {
+                    val dialog = RecipeDescriptionBottomSheet(it)
+                    dialog.isCancelable = true
+                    dialog.show(parentFragmentManager,"RecipeDescriptionBottomSheet")
+                })
                 binding.tvAllRecipes.visibility = View.VISIBLE
                 var adapter = allRecipeAdapter
 
@@ -87,13 +89,6 @@ class HomeFragment : Fragment() {
                 binding.rvAllRecipes.adapter = adapter
                 binding.rvAllRecipes.layoutManager = LinearLayoutManager(context)
                 adapter.notifyDataSetChanged()
-
-                allRecipeAdapter.onItemClick = {
-                    val dialog = RecipeDescriptionBottomSheet(it)
-                    dialog.isCancelable = true
-                    dialog.show(parentFragmentManager,"RecipeDescriptionBottomSheet")
-
-                }
 
             }
         })
