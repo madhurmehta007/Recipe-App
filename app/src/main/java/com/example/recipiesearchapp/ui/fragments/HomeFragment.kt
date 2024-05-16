@@ -53,10 +53,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun attachObservers(){
+        val popularRecipeProgress = binding.shimmerEffectPopularRecipes
+        val allRecipeProgress = binding.shimmerEffectAllRecipes
         homeViewModel.popularRecipeDataResponse.observe(viewLifecycleOwner, Observer {
 
             val popularRecipeData:MutableList<Recipe> = it.body()?.recipes as MutableList<Recipe>
-
+            popularRecipeProgress.visibility = View.GONE
             if (popularRecipeData.isNotEmpty()){
                 popularRecipeAdapter = PopularRecipeAdapter(requireContext(),popularRecipeData)
                 binding.tvPopularRecipes.visibility = View.VISIBLE
@@ -74,7 +76,7 @@ class HomeFragment : Fragment() {
         homeViewModel.allRecipeDataResponse.observe(viewLifecycleOwner, Observer {
 
             val allRecipeData:MutableList<Result> = it.body()?.results as MutableList<Result>
-
+            allRecipeProgress.visibility = View.GONE
             if (allRecipeData.isNotEmpty()){
                 allRecipeAdapter = AllRecipeAdapter(requireContext(),allRecipeData, onItemClick = {
                     val dialog = RecipeDescriptionBottomSheet(it)

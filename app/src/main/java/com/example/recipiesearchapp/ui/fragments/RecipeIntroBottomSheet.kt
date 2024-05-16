@@ -30,7 +30,7 @@ class RecipeIntroBottomSheet(val recipe: Result) : BottomSheetDialogFragment() {
     private val binding
         get() = _binding!!
     val recipeInformationViewModel: RecipeDescriptionViewModel by viewModels<RecipeDescriptionViewModel>()
-    private lateinit var ingredientsAdapter: IngredientsAdapter
+//    private lateinit var ingredientsAdapter: IngredientsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,25 +50,27 @@ class RecipeIntroBottomSheet(val recipe: Result) : BottomSheetDialogFragment() {
 
     private fun initClicks(){
         binding.btnGetIngredients.setOnClickListener {
-            val dialog = RecipeIngredientsBottomSheet()
+            val dialog = RecipeIngredientsBottomSheet(recipe)
             dialog.isCancelable = true
             dialog.show(parentFragmentManager,"RecipeIntroBottomSheet")
+
         }
+
 
     }
 
     private fun attachObservers(){
         recipeInformationViewModel.recipeInformationResponse.observe(viewLifecycleOwner, Observer {
+
             if(recipe.image.isEmpty()){
                 Picasso.get().load(R.drawable.ic_placeholder).into(binding.ivDishImage)
             }else{
                 Picasso.get().load(recipe.image).into(binding.ivDishImage)
             }
-
+            binding.tvRecipeName.text = it.body()?.title
             binding.tvReadyTime.text = "${it.body()?.readyInMinutes.toString()} min"
             binding.tvServings.text = it.body()?.servings.toString()
             binding.tvPrice.text = it.body()?.pricePerServing.toString()
-
 
         })
     }
