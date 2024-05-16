@@ -284,6 +284,8 @@
                 android:backgroundTint="@color/black"
                 app:cardCornerRadius="30dp"
                 android:layout_marginEnd="10dp"
+                android:outlineSpotShadowColor="@color/white"
+                android:outlineAmbientShadowColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -345,6 +347,8 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/black"
                 app:cardCornerRadius="30dp"
+                android:outlineSpotShadowColor="@color/white"
+                android:outlineAmbientShadowColor="@color/white"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -409,6 +413,8 @@
                 android:layout_marginEnd="10dp"
                 android:backgroundTint="@color/black"
                 app:cardCornerRadius="30dp"
+                android:outlineSpotShadowColor="@color/white"
+                android:outlineAmbientShadowColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 

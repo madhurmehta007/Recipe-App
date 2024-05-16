@@ -1,11 +1,14 @@
 package com.example.recipiesearchapp.ui.fragments
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.DisplayMetrics
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,6 +25,9 @@ import com.example.recipiesearchapp.models.Result
 import com.example.recipiesearchapp.models.Step
 import com.example.recipiesearchapp.ui.viewmodels.RecipeDescriptionViewModel
 import com.example.recipiesearchapp.utils.Constants
+import com.example.recipiesearchapp.utils.GenericUtils.Companion.removeDuplicates
+import com.example.recipiesearchapp.utils.GenericUtils.Companion.setPeekHeight
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,11 +56,16 @@ class RecipeIngredientsBottomSheet(val recipe: Result) : BottomSheetDialogFragme
         recipeInformationViewModel.getRecipeInformation(recipe.id.toString(), Constants.API_KEY)
     }
 
-    private fun initClicks(){
+    private fun initClicks() {
+        binding.btnGetFullRecipe.setOnClickListener {
+            val dialog = RecipeEquipmentBottomSheet(recipe)
+            dialog.isCancelable = true
+            dialog.show(parentFragmentManager,"RecipeEquipmentBottomSheet")
+        }
 
     }
 
-    private fun attachObservers(){
+    private fun attachObservers() {
         recipeInformationViewModel.recipeInformationResponse.observe(viewLifecycleOwner, Observer {
             val steps: MutableList<Step> =
                 it.body()?.analyzedInstructions?.get(0)?.steps as MutableList<Step>
@@ -69,28 +80,31 @@ class RecipeIngredientsBottomSheet(val recipe: Result) : BottomSheetDialogFragme
                 }
             }
 
-            ingredientsAdapter = IngredientsAdapter(requireContext(), removeDuplicates(allIngredients!!))
+            ingredientsAdapter =
+                IngredientsAdapter(requireContext(), removeDuplicates(allIngredients!!))
 
             var adapter = ingredientsAdapter
 
             adapter.notifyDataSetChanged()
             binding.rvIngredients.setHasFixedSize(true)
             binding.rvIngredients.adapter = adapter
-            binding.rvIngredients.layoutManager = GridLayoutManager(context,3)
+            binding.rvIngredients.layoutManager = GridLayoutManager(context, 3)
             adapter.notifyDataSetChanged()
 
         })
     }
+
+
     override fun onStart() {
         super.onStart()
-        val metrics = DisplayMetrics()
-        requireActivity().windowManager?.defaultDisplay?.getMetrics(metrics)
-        binding.bottomSheet.layoutParams.height = metrics.heightPixels
-        binding.bottomSheet.requestLayout()
+        dialog?.let {
+            val bottomSheet =
+                it.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout
+            val behavior = BottomSheetBehavior.from(bottomSheet)
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
+           setPeekHeight(0.84,binding.bottomSheet,requireActivity())
+            binding.bottomSheet.requestLayout()
+        }
     }
-    fun <T> removeDuplicates(list: ArrayList<T>): ArrayList<T> {
-        val distinctItems = ArrayList<T>()
-        distinctItems.addAll(list.distinct())
-        return distinctItems
-    }
+
 }

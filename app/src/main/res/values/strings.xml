@@ -21,4 +21,10 @@
     <string name="quick_summary">Quick Summary</string>
     <string name="nutrition">Nutrition</string>
     <string name="equipment_name">Equipment Name</string>
+    <string name="get_full_recipe">Get full recipe</string>
+    <string name="full_recipe">Full recipe</string>
+    <string name="get_similar_recipe">Get Similar recipe</string>
+    <string name="lorem_ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
+    <string name="good_for_health_nutrition">Good for health nutrition</string>
+    <string name="bad_for_health_nutrition">Bad for health nutrition</string>
 </resources>
