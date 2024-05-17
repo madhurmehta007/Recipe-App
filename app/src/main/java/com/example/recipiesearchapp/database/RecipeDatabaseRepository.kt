@@ -2,6 +2,7 @@ package com.example.recipiesearchapp.database
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
+import com.example.recipiesearchapp.models.RecipeDataBrief
 import com.example.recipiesearchapp.models.SavedRecipeData
 import javax.inject.Inject
 
@@ -19,8 +20,13 @@ class RecipeDatabaseRepository@Inject constructor(
     }
 
     @WorkerThread
-    fun deleteRecipe(recipe:SavedRecipeData){
-        recipeDao.deleteRecipeData(recipe)
+    fun deleteRecipe(id:Int){
+        recipeDao.deleteRecipeData(id)
+    }
+
+    @WorkerThread
+    fun updateRecipe(recipe:RecipeDataBrief) {
+        recipeDao.updateNews(recipe)
     }
 
 }

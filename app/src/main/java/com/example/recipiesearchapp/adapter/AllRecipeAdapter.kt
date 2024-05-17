@@ -1,6 +1,7 @@
 package com.example.recipiesearchapp.adapter
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -40,6 +41,23 @@ RecyclerView.Adapter<AllRecipeAdapter.AllRecipeViewHolder>(){
             onItemClick.invoke(recipe)
         }
 
+//        holder.itemView.setOnLongClickListener {
+//            AlertDialog.Builder(context)
+//                .setTitle("Delete")
+//                .setMessage("Are you sure you want to delete?")
+//                .setPositiveButton("Yes") { dialog, _ ->
+//                    newsDBViewModel.deleteNews(item)
+//                    Snacker(it, "News Deleted").error()
+//                }
+//                .setNegativeButton("No") { dialog, _ ->
+//                    Snacker(it, "News Not Deleted").warning()
+//                    newsDBViewModel.updateNews(item)
+//                }
+//                .setCancelable(true)
+//                .show()
+//
+//            true
+//        }
     }
 
     override fun getItemCount(): Int {

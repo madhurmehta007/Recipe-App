@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recipiesearchapp.database.RecipeDatabaseRepository
+import com.example.recipiesearchapp.models.RecipeDataBrief
 import com.example.recipiesearchapp.models.RecipeInformation
 import com.example.recipiesearchapp.models.SavedRecipeData
 import com.example.recipiesearchapp.networking.Repository
@@ -43,9 +44,15 @@ class RecipeDescriptionViewModel@Inject constructor(private val repository: Repo
         }
     }
 
-    fun deleteRecipe(recipe:SavedRecipeData){
+    fun deleteRecipe(id:Int){
         viewModelScope.launch(Dispatchers.IO) {
-            databaseRepository.deleteRecipe(recipe)
+            databaseRepository.deleteRecipe(id)
+        }
+    }
+
+    fun updateRecipe(recipe:RecipeDataBrief){
+        viewModelScope.launch(Dispatchers.IO) {
+            databaseRepository.updateRecipe(recipe)
         }
     }
 }

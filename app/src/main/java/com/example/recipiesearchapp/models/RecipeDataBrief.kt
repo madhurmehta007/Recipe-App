@@ -1,7 +1,11 @@
 package com.example.recipiesearchapp.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "recipeDataBrief")
 data class RecipeDataBrief(
-    val id: Int,
+  @PrimaryKey  val id: Int,
     val image: String,
     val imageType: String,
     val title: String

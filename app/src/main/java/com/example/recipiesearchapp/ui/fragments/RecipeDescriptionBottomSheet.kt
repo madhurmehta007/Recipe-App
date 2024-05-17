@@ -22,6 +22,7 @@ import com.example.recipiesearchapp.utils.Constants.Companion.API_KEY
 import com.example.recipiesearchapp.utils.GenericUtils
 import com.example.recipiesearchapp.utils.GenericUtils.Companion.removeDuplicates
 import com.example.recipiesearchapp.utils.GenericUtils.Companion.show
+import com.example.recipiesearchapp.utils.Snacker
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
@@ -130,9 +131,8 @@ class RecipeDescriptionBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDia
                 if (ivFavouriteOutline.visibility == View.VISIBLE){
                     ivFavouriteOutline.visibility = View.INVISIBLE
                     ivFavouriteFilled.visibility = View.VISIBLE
-
                     savedRecipeData?.let { it1 -> recipeInformationViewModel.insertRecipe(it1) }
-
+                    Snacker(binding.root, "Recipe added to favourites").success()
                 }
                 else{
                     ivFavouriteOutline.visibility = View.VISIBLE

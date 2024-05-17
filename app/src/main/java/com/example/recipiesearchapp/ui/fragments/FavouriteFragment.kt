@@ -1,18 +1,22 @@
 package com.example.recipiesearchapp.ui.fragments
 
+import SwipeToDeleteCallback
+import android.app.AlertDialog
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.recipiesearchapp.adapter.AllRecipeAdapter
-import com.example.recipiesearchapp.database.RecipeDatabase
+import androidx.recyclerview.widget.RecyclerView
+import com.example.recipiesearchapp.adapter.FavouriteRecipeAdapter
 import com.example.recipiesearchapp.databinding.FragmentFavouriteBinding
 import com.example.recipiesearchapp.models.RecipeDataBrief
 import com.example.recipiesearchapp.ui.viewmodels.FavouriteViewModel
 import com.example.recipiesearchapp.ui.viewmodels.RecipeDescriptionViewModel
+import com.example.recipiesearchapp.utils.Snacker
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,7 +25,7 @@ class FavouriteFragment : Fragment() {
     private val binding: FragmentFavouriteBinding by lazy {
         FragmentFavouriteBinding.inflate(layoutInflater)
     }
-    private lateinit var allRecipeAdapter: AllRecipeAdapter
+    private lateinit var favouriteRecipeAdapter: FavouriteRecipeAdapter
     private val viewModel: FavouriteViewModel by viewModels()
     private val recipeDescriptionViewModel: RecipeDescriptionViewModel by viewModels<RecipeDescriptionViewModel>()
 
@@ -38,10 +42,20 @@ class FavouriteFragment : Fragment() {
 
         initClicks()
         attachObservers()
-        initRecyclerView()
     }
 
     private fun initClicks() {
+
+        val swipeToDeleteCallback = object : SwipeToDeleteCallback(context) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                // Get the position of the item
+                val position = viewHolder.adapterPosition
+                // Call the method to delete the item
+                deleteItem(position)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+        itemTouchHelper.attachToRecyclerView(binding.rvSavedRecipes)
 
     }
 
@@ -62,10 +76,13 @@ class FavouriteFragment : Fragment() {
                 )
             }
 
-            allRecipeAdapter =
-                savedRecipeData?.let { AllRecipeAdapter(requireContext(), it, onItemClick = {}) }!!
+            favouriteRecipeAdapter = FavouriteRecipeAdapter(requireContext(), savedRecipeData,onItemClick = {
+                val dialog = RecipeDescriptionBottomSheet(it)
+                dialog.isCancelable = true
+                dialog.show(parentFragmentManager,"RecipeDescriptionBottomSheet")
+            })
 
-            val adapter = allRecipeAdapter
+            val adapter = favouriteRecipeAdapter
 
             binding.rvSavedRecipes.setHasFixedSize(true)
             binding.rvSavedRecipes.adapter = adapter
@@ -74,7 +91,24 @@ class FavouriteFragment : Fragment() {
         }
     }
 
-    private fun initRecyclerView() {
+    private fun deleteItem(position: Int) {
+        val id = favouriteRecipeAdapter.favouriteRecipeList[position].id
+        AlertDialog.Builder(context)
+            .setTitle("Delete")
+            .setMessage("Are you sure you want to delete?")
+            .setPositiveButton("Yes") { dialog, _ ->
+                recipeDescriptionViewModel.deleteRecipe(id)
+                favouriteRecipeAdapter.notifyItemRemoved(position)
+                Snacker(binding.root, "Recipe Deleted").error()
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                Snacker(binding.root, "Recipe Not Deleted").warning()
+                favouriteRecipeAdapter.notifyItemRemoved(position)
+            }
+            .setCancelable(true)
+            .show()
+
+        true
 
 
     }

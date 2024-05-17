@@ -6,6 +6,8 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
+import com.example.recipiesearchapp.models.RecipeDataBrief
 import com.example.recipiesearchapp.models.SavedRecipeData
 import kotlinx.coroutines.flow.Flow
 
@@ -19,9 +21,9 @@ interface RecipeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertRecipeData(vararg recipeDataList:SavedRecipeData)
 
-//    @Query("DELETE FROM recipeData WHERE id = :id")
-//    fun deleteRecipeData(id:Int)
+    @Query("DELETE FROM recipeData WHERE id = :id")
+    fun deleteRecipeData(id:Int)
+    @Update
+    fun updateNews(vararg recipeData: RecipeDataBrief)
 
-    @Delete
-    fun deleteRecipeData(vararg recipeData: SavedRecipeData)
 }

@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_favouriteFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_favouriteFragment_to_recipeDescriptionBottomSheet"
+            app:destination="@id/recipeDescriptionBottomSheet" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
