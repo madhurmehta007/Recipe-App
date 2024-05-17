@@ -27,4 +27,6 @@
     <string name="lorem_ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
     <string name="good_for_health_nutrition">Good for health nutrition</string>
     <string name="bad_for_health_nutrition">Bad for health nutrition</string>
+    <string name="similar_recipes">Similar recipes</string>
+    <string name="favourite_recipes">Favourite recipes</string>
 </resources>

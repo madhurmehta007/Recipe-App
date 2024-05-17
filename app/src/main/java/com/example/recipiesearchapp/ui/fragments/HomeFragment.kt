@@ -14,7 +14,7 @@ import com.example.recipiesearchapp.adapter.AllRecipeAdapter
 import com.example.recipiesearchapp.adapter.PopularRecipeAdapter
 import com.example.recipiesearchapp.databinding.FragmentHomeBinding
 import com.example.recipiesearchapp.models.Recipe
-import com.example.recipiesearchapp.models.Result
+import com.example.recipiesearchapp.models.RecipeDataBrief
 import com.example.recipiesearchapp.ui.viewmodels.HomeViewModel
 import com.example.recipiesearchapp.utils.Constants.Companion.API_KEY
 import dagger.hilt.android.AndroidEntryPoint
@@ -75,7 +75,7 @@ class HomeFragment : Fragment() {
 
         homeViewModel.allRecipeDataResponse.observe(viewLifecycleOwner, Observer {
 
-            val allRecipeData:MutableList<Result> = it.body()?.results as MutableList<Result>
+            val allRecipeData:MutableList<RecipeDataBrief> = it.body()?.results as MutableList<RecipeDataBrief>
             allRecipeProgress.visibility = View.GONE
             if (allRecipeData.isNotEmpty()){
                 allRecipeAdapter = AllRecipeAdapter(requireContext(),allRecipeData, onItemClick = {

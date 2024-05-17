@@ -37,9 +37,76 @@
         <action
             android:id="@+id/action_searchFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_recipeIntroBottomSheet"
+            app:destination="@id/recipeIntroBottomSheet" />
     </fragment>
     <fragment
         android:id="@+id/recipeDescriptionBottomSheet"
         android:name="com.example.recipiesearchapp.ui.fragments.RecipeDescriptionBottomSheet"
-        android:label="RecipeDescriptionBottomSheet" />
+        android:label="RecipeDescriptionBottomSheet" >
+        <action
+            android:id="@+id/action_recipeDescriptionBottomSheet_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/recipeEquipmentBottomSheet"
+        android:name="com.example.recipiesearchapp.ui.fragments.RecipeEquipmentBottomSheet"
+        android:label="RecipeEquipmentBottomSheet" >
+        <action
+            android:id="@+id/action_recipeEquipmentBottomSheet_to_similarRecipeBottomSheet"
+            app:destination="@id/similarRecipeBottomSheet" />
+        <action
+            android:id="@+id/action_recipeEquipmentBottomSheet_to_recipeIngredientsBottomSheet"
+            app:destination="@id/recipeIngredientsBottomSheet" />
+        <action
+            android:id="@+id/action_recipeEquipmentBottomSheet_to_recipeIntroBottomSheet"
+            app:destination="@id/recipeIntroBottomSheet" />
+        <action
+            android:id="@+id/action_recipeEquipmentBottomSheet_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/recipeIntroBottomSheet"
+        android:name="com.example.recipiesearchapp.ui.fragments.RecipeIntroBottomSheet"
+        android:label="RecipeIntroBottomSheet" >
+        <action
+            android:id="@+id/action_recipeIntroBottomSheet_to_recipeIngredientsBottomSheet"
+            app:destination="@id/recipeIngredientsBottomSheet" />
+        <action
+            android:id="@+id/action_recipeIntroBottomSheet_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/similarRecipeBottomSheet"
+        android:name="com.example.recipiesearchapp.ui.fragments.SimilarRecipeBottomSheet"
+        android:label="SimilarRecipeBottomSheet" >
+        <action
+            android:id="@+id/action_similarRecipeBottomSheet_to_recipeEquipmentBottomSheet"
+            app:destination="@id/recipeEquipmentBottomSheet" />
+        <action
+            android:id="@+id/action_similarRecipeBottomSheet_to_recipeIngredientsBottomSheet"
+            app:destination="@id/recipeIngredientsBottomSheet" />
+        <action
+            android:id="@+id/action_similarRecipeBottomSheet_to_recipeIntroBottomSheet"
+            app:destination="@id/recipeIntroBottomSheet" />
+        <action
+            android:id="@+id/action_similarRecipeBottomSheet_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/recipeIngredientsBottomSheet"
+        android:name="com.example.recipiesearchapp.ui.fragments.RecipeIngredientsBottomSheet"
+        android:label="fragment_similar_recipe_bottom_sheet"
+        tools:layout="@layout/fragment_similar_recipe_bottom_sheet" >
+        <action
+            android:id="@+id/action_recipeIngredientsBottomSheet_to_recipeEquipmentBottomSheet"
+            app:destination="@id/recipeEquipmentBottomSheet" />
+        <action
+            android:id="@+id/action_recipeIngredientsBottomSheet_to_recipeIntroBottomSheet"
+            app:destination="@id/recipeIntroBottomSheet" />
+        <action
+            android:id="@+id/action_recipeIngredientsBottomSheet_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </dialog>
 </navigation>

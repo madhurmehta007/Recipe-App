@@ -6,15 +6,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipiesearchapp.databinding.ItemAllRecipeBinding
-import com.example.recipiesearchapp.databinding.ItemPopularRecipeBinding
-import com.example.recipiesearchapp.models.Recipe
-import com.example.recipiesearchapp.models.Result
+import com.example.recipiesearchapp.models.RecipeDataBrief
 import com.squareup.picasso.Picasso
 
 class AllRecipeAdapter(
-val context: Context,
-val allRecipeList:MutableList<Result>,
-val onItemClick: (Result) -> Unit
+    val context: Context,
+    val allRecipeList:MutableList<RecipeDataBrief>,
+    val onItemClick: (RecipeDataBrief) -> Unit
 ):
 RecyclerView.Adapter<AllRecipeAdapter.AllRecipeViewHolder>(){
 

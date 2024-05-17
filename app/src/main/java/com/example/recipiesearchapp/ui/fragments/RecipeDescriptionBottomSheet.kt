@@ -1,10 +1,10 @@
 package com.example.recipiesearchapp.ui.fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,17 +14,21 @@ import com.example.recipiesearchapp.adapter.IngredientsAdapter
 import com.example.recipiesearchapp.databinding.FragmentRecipeDescriptionBottomSheetBinding
 import com.example.recipiesearchapp.models.Equipment
 import com.example.recipiesearchapp.models.Ingredient
-import com.example.recipiesearchapp.models.Result
+import com.example.recipiesearchapp.models.RecipeDataBrief
+import com.example.recipiesearchapp.models.SavedRecipeData
 import com.example.recipiesearchapp.models.Step
 import com.example.recipiesearchapp.ui.viewmodels.RecipeDescriptionViewModel
 import com.example.recipiesearchapp.utils.Constants.Companion.API_KEY
+import com.example.recipiesearchapp.utils.GenericUtils
 import com.example.recipiesearchapp.utils.GenericUtils.Companion.removeDuplicates
+import com.example.recipiesearchapp.utils.GenericUtils.Companion.show
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RecipeDescriptionBottomSheet(val recipe: Result) : BottomSheetDialogFragment() {
+class RecipeDescriptionBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialogFragment() {
     private var _binding: FragmentRecipeDescriptionBottomSheetBinding? = null
     private val binding
         get() = _binding!!
@@ -36,6 +40,7 @@ class RecipeDescriptionBottomSheet(val recipe: Result) : BottomSheetDialogFragme
     private lateinit var equipmentsAdapter: EquipmentsAdapter
     private lateinit var ingredientsAdapter: IngredientsAdapter
 
+    private var savedRecipeData:SavedRecipeData?=null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -121,6 +126,19 @@ class RecipeDescriptionBottomSheet(val recipe: Result) : BottomSheetDialogFragme
                 }
             }
 
+            cvFavourite.setOnClickListener {
+                if (ivFavouriteOutline.visibility == View.VISIBLE){
+                    ivFavouriteOutline.visibility = View.INVISIBLE
+                    ivFavouriteFilled.visibility = View.VISIBLE
+
+                    savedRecipeData?.let { it1 -> recipeInformationViewModel.insertRecipe(it1) }
+
+                }
+                else{
+                    ivFavouriteOutline.visibility = View.VISIBLE
+                    ivFavouriteFilled.visibility = View.INVISIBLE
+                }
+            }
         }
     }
 
@@ -164,6 +182,22 @@ class RecipeDescriptionBottomSheet(val recipe: Result) : BottomSheetDialogFragme
                 }
             }
 
+            it.body()?.let {recipeData->
+                savedRecipeData = SavedRecipeData(
+                    id = recipeData.id,
+                    image = recipeData.image,
+                    readyInMinutes = recipeData.readyInMinutes,
+                    instructions = recipeData.instructions,
+                    servings = recipeData.servings,
+                    summary = recipeData.summary,
+                    title = recipeData.title,
+                    equipment = allEquipments!!,
+                    ingredients = allIngredients!!,
+                    pricePerServing = recipeData.pricePerServing
+                )
+            }
+
+
             ingredientsAdapter = IngredientsAdapter(requireContext(), removeDuplicates(allIngredients!!))
 
             binding.tvIngredientsText.visibility = View.VISIBLE
@@ -189,7 +223,21 @@ class RecipeDescriptionBottomSheet(val recipe: Result) : BottomSheetDialogFragme
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapterEquipment.notifyDataSetChanged()
 
+
+            binding.cvFavourite.show()
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        dialog?.let {
+            val bottomSheet =
+                it.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout
+            val behavior = BottomSheetBehavior.from(bottomSheet)
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
+            GenericUtils.setPeekHeight(1.0, binding.bottomSheet, requireActivity())
+            binding.bottomSheet.requestLayout()
+        }
     }
 
 

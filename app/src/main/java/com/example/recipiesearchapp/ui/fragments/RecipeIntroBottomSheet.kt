@@ -1,9 +1,6 @@
 package com.example.recipiesearchapp.ui.fragments
 
-import android.app.Dialog
 import android.os.Bundle
-import android.util.DisplayMetrics
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,22 +8,18 @@ import android.widget.FrameLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.recipiesearchapp.R
-import com.example.recipiesearchapp.adapter.IngredientsAdapter
-import com.example.recipiesearchapp.databinding.FragmentRecipeDescriptionBottomSheetBinding
 import com.example.recipiesearchapp.databinding.FragmentRecipeIntroBottomSheetBinding
-import com.example.recipiesearchapp.models.Result
+import com.example.recipiesearchapp.models.RecipeDataBrief
 import com.example.recipiesearchapp.ui.viewmodels.RecipeDescriptionViewModel
-import com.example.recipiesearchapp.utils.Constants
 import com.example.recipiesearchapp.utils.Constants.Companion.API_KEY
 import com.example.recipiesearchapp.utils.GenericUtils
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RecipeIntroBottomSheet(val recipe: Result) : BottomSheetDialogFragment() {
+class RecipeIntroBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialogFragment() {
 
     private var _binding: FragmentRecipeIntroBottomSheetBinding? = null
     private val binding

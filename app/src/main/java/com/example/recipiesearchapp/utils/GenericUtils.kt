@@ -2,6 +2,7 @@ package com.example.recipiesearchapp.utils
 
 import android.app.Activity
 import android.util.DisplayMetrics
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 
 class GenericUtils {
@@ -15,6 +16,14 @@ class GenericUtils {
             val metrics = DisplayMetrics()
             activity.windowManager?.defaultDisplay?.getMetrics(metrics)
             bottomSheet.layoutParams.height = (metrics.heightPixels * height).toInt()
+        }
+
+        fun View.hide(){
+            visibility = View.GONE
+        }
+
+        fun View.show() {
+            visibility = View.VISIBLE
         }
     }
 }

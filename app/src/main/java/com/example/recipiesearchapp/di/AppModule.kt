@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import androidx.room.Room
+import com.example.recipiesearchapp.database.RecipeDatabase
 import com.example.recipiesearchapp.networking.ApiInterface
 import com.example.recipiesearchapp.utils.Constants.Companion.BASE_URL
 import dagger.Module
@@ -64,7 +65,10 @@ object AppModule {
             .client(client)
             .build()
     }
-
+    @Provides
+    fun providesRecipeDatabase(app:Application):RecipeDatabase =
+        Room.databaseBuilder(app,RecipeDatabase::class.java,"recipe database")
+            .build()
 
 }
 

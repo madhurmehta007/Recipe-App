@@ -1,7 +1,6 @@
 package com.example.recipiesearchapp.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +8,10 @@ import android.widget.FrameLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.recipiesearchapp.R
 import com.example.recipiesearchapp.adapter.EquipmentsAdapter
-import com.example.recipiesearchapp.databinding.FragmentRecipeDescriptionBottomSheetBinding
 import com.example.recipiesearchapp.databinding.FragmentRecipeEquipmentBottomSheetBinding
 import com.example.recipiesearchapp.models.Equipment
-import com.example.recipiesearchapp.models.Recipe
-import com.example.recipiesearchapp.models.Result
+import com.example.recipiesearchapp.models.RecipeDataBrief
 import com.example.recipiesearchapp.models.Step
 import com.example.recipiesearchapp.ui.viewmodels.RecipeDescriptionViewModel
 import com.example.recipiesearchapp.utils.Constants
@@ -25,7 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RecipeEquipmentBottomSheet(val recipe: Result) : BottomSheetDialogFragment() {
+class RecipeEquipmentBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialogFragment() {
     private var _binding: FragmentRecipeEquipmentBottomSheetBinding? = null
     private val binding
         get() = _binding!!
@@ -120,6 +116,12 @@ class RecipeEquipmentBottomSheet(val recipe: Result) : BottomSheetDialogFragment
                 }
             }
 
+        }
+
+        binding.btnGetSimilarRecipe.setOnClickListener {
+            val dialog = SimilarRecipeBottomSheet(recipe)
+            dialog.isCancelable = true
+            dialog.show(parentFragmentManager,"SimilarRecipeBottomSheet")
         }
     }
 

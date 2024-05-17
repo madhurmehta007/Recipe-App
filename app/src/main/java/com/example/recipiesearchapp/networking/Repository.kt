@@ -3,6 +3,8 @@ package com.example.recipiesearchapp.networking
 import com.example.recipiesearchapp.models.AllRecipeList
 import com.example.recipiesearchapp.models.RecipeData
 import com.example.recipiesearchapp.models.RecipeInformation
+import com.example.recipiesearchapp.models.SimilarRecipe
+import com.example.recipiesearchapp.models.SimilarRecipeItem
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -22,5 +24,9 @@ class Repository @Inject constructor(private val apiInterface: ApiInterface) {
 
     suspend fun getSearchResult(apiKey: String,query:String): Response<AllRecipeList> {
         return apiInterface.getSearchResult(apiKey,query)
+    }
+
+    suspend fun getSimilarRecipes(id:String,apiKey: String):Response<ArrayList<SimilarRecipeItem>>{
+        return apiInterface.getSimilarRecipes(id,apiKey)
     }
 }

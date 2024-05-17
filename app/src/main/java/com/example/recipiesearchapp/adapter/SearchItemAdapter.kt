@@ -5,16 +5,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipiesearchapp.databinding.ItemSearchBinding
-import com.example.recipiesearchapp.models.Result
+import com.example.recipiesearchapp.models.RecipeDataBrief
 import com.squareup.picasso.Picasso
 
 class SearchItemAdapter(
     val context: Context,
-    val searchItem:MutableList<Result>
+    val searchItem:MutableList<RecipeDataBrief>
 ):
     RecyclerView.Adapter<SearchItemAdapter.SearchItemViewHolder>(){
 
-    var onItemClick: ((Result) -> Unit)? = null
+    var onItemClick: ((RecipeDataBrief) -> Unit)? = null
     class SearchItemViewHolder(val binding: ItemSearchBinding, context: Context):
         RecyclerView.ViewHolder(binding.root){
 

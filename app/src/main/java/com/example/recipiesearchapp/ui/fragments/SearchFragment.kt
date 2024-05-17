@@ -1,26 +1,21 @@
 package com.example.recipiesearchapp.ui.fragments
 
 
-import android.app.Activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipiesearchapp.adapter.SearchItemAdapter
 import com.example.recipiesearchapp.databinding.FragmentSearchBinding
-import com.example.recipiesearchapp.models.Result
+import com.example.recipiesearchapp.models.RecipeDataBrief
 import com.example.recipiesearchapp.ui.viewmodels.SearchViewModel
 import com.example.recipiesearchapp.utils.Constants.Companion.API_KEY
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -72,7 +67,7 @@ class SearchFragment : Fragment() {
 
         searchViewModel.searchDataResponse.observe(viewLifecycleOwner, Observer {
             if (it.body()!=null){
-            val searchData:MutableList<Result> = it.body()?.results as MutableList<Result>
+            val searchData:MutableList<RecipeDataBrief> = it.body()?.results as MutableList<RecipeDataBrief>
 
                 searchItemAdapter = SearchItemAdapter(requireContext(),searchData)
 

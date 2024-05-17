@@ -16,12 +16,11 @@
             android:id="@+id/bottomSheet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bottom_sheet_background"
             android:paddingVertical="10dp"
             tools:context=".ui.fragments.RecipeIngredientsBottomSheet">
 
             <TextView
-                android:id="@+id/tvRecipeName"
+                android:id="@+id/tvFullRecipe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -49,7 +48,7 @@
                 android:layout_height="0dp"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="20dp"
-                app:layout_constraintTop_toBottomOf="@+id/tvRecipeName" />
+                app:layout_constraintTop_toBottomOf="@+id/tvFullRecipe" />
 
 
             <TextView
@@ -280,7 +279,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnGetIngredients"
+        android:id="@+id/btnGetSimilarRecipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
