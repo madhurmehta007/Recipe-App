@@ -22,11 +22,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        navController = navHostFragment.navController
+
         binding.navView.setOnItemSelectedListener {
 
             when(it.itemId) {
-                R.id.navigation_home -> replaceFragment(HomeFragment())
-                R.id.navigation_favourite -> replaceFragment(FavouriteFragment())
+                R.id.navigation_home -> navController.navigate(R.id.navigation_home)
+                R.id.navigation_favourite -> navController.navigate(R.id.navigation_favourite)
 
                 else -> {}
 
@@ -34,16 +37,8 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
-        navController = navHostFragment.navController
+
         setContentView(binding.root)
     }
 
-    private fun replaceFragment(fragment: Fragment){
-
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frameLayout, fragment)
-        fragmentTransaction.commit()
-    }
 }

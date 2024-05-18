@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/navigation_home">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/navigation_home"
         android:name="com.example.recipiesearchapp.ui.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
@@ -18,16 +18,16 @@
             app:destination="@id/recipeDescriptionBottomSheet" />
         <action
             android:id="@+id/action_homeFragment_to_favouriteFragment"
-            app:destination="@id/favouriteFragment" />
+            app:destination="@id/navigation_favourite" />
     </fragment>
     <fragment
-        android:id="@+id/favouriteFragment"
+        android:id="@+id/navigation_favourite"
         android:name="com.example.recipiesearchapp.ui.fragments.FavouriteFragment"
         android:label="fragment_favourite"
         tools:layout="@layout/fragment_favourite" >
         <action
             android:id="@+id/action_favouriteFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/navigation_home" />
         <action
             android:id="@+id/action_favouriteFragment_to_recipeDescriptionBottomSheet"
             app:destination="@id/recipeDescriptionBottomSheet" />
@@ -39,7 +39,7 @@
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/navigation_home" />
         <action
             android:id="@+id/action_searchFragment_to_recipeIntroBottomSheet"
             app:destination="@id/recipeIntroBottomSheet" />
@@ -50,7 +50,7 @@
         android:label="RecipeDescriptionBottomSheet" >
         <action
             android:id="@+id/action_recipeDescriptionBottomSheet_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/navigation_home" />
     </fragment>
     <dialog
         android:id="@+id/recipeEquipmentBottomSheet"
