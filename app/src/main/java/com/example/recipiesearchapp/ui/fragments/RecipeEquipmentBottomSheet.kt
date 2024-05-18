@@ -8,6 +8,7 @@ import android.widget.FrameLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.recipiesearchapp.BuildConfig
 import com.example.recipiesearchapp.adapter.EquipmentsAdapter
 import com.example.recipiesearchapp.databinding.FragmentRecipeEquipmentBottomSheetBinding
 import com.example.recipiesearchapp.models.Equipment
@@ -44,7 +45,7 @@ class RecipeEquipmentBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialo
 
         initClicks()
         attachObservers()
-        recipeInformationViewModel.getRecipeInformation(recipe.id.toString(), Constants.API_KEY)
+        recipeInformationViewModel.getRecipeInformation(recipe.id.toString(), BuildConfig.API_KEY)
     }
 
     private fun initClicks(){

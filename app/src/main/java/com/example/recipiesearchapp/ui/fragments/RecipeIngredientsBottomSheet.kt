@@ -8,6 +8,7 @@ import android.widget.FrameLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.recipiesearchapp.BuildConfig
 import com.example.recipiesearchapp.adapter.IngredientsAdapter
 import com.example.recipiesearchapp.databinding.FragmentRecipeIngredientsBottomSheetBinding
 import com.example.recipiesearchapp.models.Ingredient
@@ -42,7 +43,7 @@ class RecipeIngredientsBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDia
         super.onViewCreated(view, savedInstanceState)
         initClicks()
         attachObservers()
-        recipeInformationViewModel.getRecipeInformation(recipe.id.toString(), Constants.API_KEY)
+        recipeInformationViewModel.getRecipeInformation(recipe.id.toString(), BuildConfig.API_KEY)
     }
 
     private fun initClicks() {

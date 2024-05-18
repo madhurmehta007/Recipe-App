@@ -1,5 +1,6 @@
 package com.example.recipiesearchapp.ui.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +8,11 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.example.recipiesearchapp.BuildConfig
 import com.example.recipiesearchapp.R
 import com.example.recipiesearchapp.databinding.FragmentRecipeIntroBottomSheetBinding
 import com.example.recipiesearchapp.models.RecipeDataBrief
 import com.example.recipiesearchapp.ui.viewmodels.RecipeDescriptionViewModel
-import com.example.recipiesearchapp.utils.Constants.Companion.API_KEY
 import com.example.recipiesearchapp.utils.GenericUtils
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -40,7 +41,7 @@ class RecipeIntroBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialogFra
         super.onViewCreated(view, savedInstanceState)
         initClicks()
         attachObservers()
-        recipeInformationViewModel.getRecipeInformation(recipe.id.toString(), API_KEY)
+        recipeInformationViewModel.getRecipeInformation(recipe.id.toString(), BuildConfig.API_KEY)
     }
 
     private fun initClicks(){

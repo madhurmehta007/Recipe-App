@@ -8,6 +8,7 @@ import android.widget.FrameLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.recipiesearchapp.BuildConfig
 import com.example.recipiesearchapp.R
 import com.example.recipiesearchapp.adapter.EquipmentsAdapter
 import com.example.recipiesearchapp.adapter.IngredientsAdapter
@@ -18,8 +19,8 @@ import com.example.recipiesearchapp.models.RecipeDataBrief
 import com.example.recipiesearchapp.models.SavedRecipeData
 import com.example.recipiesearchapp.models.Step
 import com.example.recipiesearchapp.ui.viewmodels.RecipeDescriptionViewModel
-import com.example.recipiesearchapp.utils.Constants.Companion.API_KEY
 import com.example.recipiesearchapp.utils.GenericUtils
+import com.example.recipiesearchapp.utils.GenericUtils.Companion.hide
 import com.example.recipiesearchapp.utils.GenericUtils.Companion.removeDuplicates
 import com.example.recipiesearchapp.utils.GenericUtils.Companion.show
 import com.example.recipiesearchapp.utils.Snacker
@@ -41,7 +42,7 @@ class RecipeDescriptionBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDia
     private lateinit var equipmentsAdapter: EquipmentsAdapter
     private lateinit var ingredientsAdapter: IngredientsAdapter
 
-    private var savedRecipeData:SavedRecipeData?=null
+    private var savedRecipeData: SavedRecipeData? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,88 +56,87 @@ class RecipeDescriptionBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDia
         super.onViewCreated(view, savedInstanceState)
         initClicks()
         attachObservers()
-        recipeInformationViewModel.getRecipeInformation(recipe.id.toString(), API_KEY)
+        recipeInformationViewModel.getRecipeInformation(recipe.id.toString(), BuildConfig.API_KEY)
     }
 
     private fun initClicks() {
         binding.apply {
             cvDropDown.setOnClickListener {
                 if (tvNutrition.visibility == View.VISIBLE) {
-                    tvNutrition.visibility = View.GONE
-                    ivArrowDropDown.visibility = View.VISIBLE
-                    ivArrowDropUp.visibility = View.GONE
+                    tvNutrition.hide()
+                    ivArrowDropDown.show()
+                    ivArrowDropUp.hide()
                 } else {
-                    tvNutrition.visibility = View.VISIBLE
-                    ivArrowDropDown.visibility = View.GONE
-                    ivArrowDropUp.visibility = View.VISIBLE
+                    tvNutrition.show()
+                    ivArrowDropDown.hide()
+                    ivArrowDropUp.show()
                 }
             }
             clNutrition.setOnClickListener {
                 if (tvNutrition.visibility == View.VISIBLE) {
-                    tvNutrition.visibility = View.GONE
-                    ivArrowDropDown.visibility = View.VISIBLE
-                    ivArrowDropUp.visibility = View.GONE
+                    tvNutrition.hide()
+                    ivArrowDropDown.show()
+                    ivArrowDropUp.hide()
                 } else {
-                    tvNutrition.visibility = View.VISIBLE
-                    ivArrowDropDown.visibility = View.GONE
-                    ivArrowDropUp.visibility = View.VISIBLE
+                    tvNutrition.show()
+                    ivArrowDropDown.hide()
+                    ivArrowDropUp.show()
                 }
             }
             cvBadNutritionDropDown.setOnClickListener {
                 if (tvBadNutrition.visibility == View.VISIBLE) {
-                    tvBadNutrition.visibility = View.GONE
-                    ivBadNutritionDropDown.visibility = View.VISIBLE
-                    ivBadNutritionDropUp.visibility = View.GONE
+                    tvBadNutrition.hide()
+                    ivBadNutritionDropDown.show()
+                    ivBadNutritionDropUp.hide()
                 } else {
-                    tvBadNutrition.visibility = View.VISIBLE
-                    ivBadNutritionDropDown.visibility = View.GONE
-                    ivBadNutritionDropUp.visibility = View.VISIBLE
+                    tvBadNutrition.show()
+                    ivBadNutritionDropDown.hide()
+                    ivBadNutritionDropUp.show()
                 }
             }
             clBadHealthNutrition.setOnClickListener {
                 if (tvBadNutrition.visibility == View.VISIBLE) {
-                    tvBadNutrition.visibility = View.GONE
-                    ivBadNutritionDropDown.visibility = View.VISIBLE
-                    ivBadNutritionDropUp.visibility = View.GONE
+                    tvBadNutrition.hide()
+                    ivBadNutritionDropDown.show()
+                    ivBadNutritionDropUp.hide()
                 } else {
-                    tvBadNutrition.visibility = View.VISIBLE
-                    ivBadNutritionDropDown.visibility = View.GONE
-                    ivBadNutritionDropUp.visibility = View.VISIBLE
+                    tvBadNutrition.show()
+                    ivBadNutritionDropDown.hide()
+                    ivBadNutritionDropUp.show()
                 }
             }
             cvGoodNutritionDropDown.setOnClickListener {
                 if (tvGoodNutrition.visibility == View.VISIBLE) {
-                    tvGoodNutrition.visibility = View.GONE
-                    ivGoodNutritionDropDown.visibility = View.VISIBLE
-                    ivGoodNutritionDropUp.visibility = View.GONE
+                    tvGoodNutrition.hide()
+                    ivGoodNutritionDropDown.show()
+                    ivGoodNutritionDropUp.hide()
                 } else {
-                    tvGoodNutrition.visibility = View.VISIBLE
-                    ivGoodNutritionDropDown.visibility = View.GONE
-                    ivGoodNutritionDropUp.visibility = View.VISIBLE
+                    tvGoodNutrition.show()
+                    ivGoodNutritionDropDown.hide()
+                    ivGoodNutritionDropUp.show()
                 }
             }
             clGoodHealthNutrition.setOnClickListener {
                 if (tvGoodNutrition.visibility == View.VISIBLE) {
-                    tvGoodNutrition.visibility = View.GONE
-                    ivGoodNutritionDropDown.visibility = View.VISIBLE
-                    ivGoodNutritionDropUp.visibility = View.GONE
+                    tvGoodNutrition.hide()
+                    ivGoodNutritionDropDown.show()
+                    ivGoodNutritionDropUp.hide()
                 } else {
-                    tvGoodNutrition.visibility = View.VISIBLE
-                    ivGoodNutritionDropDown.visibility = View.GONE
-                    ivGoodNutritionDropUp.visibility = View.VISIBLE
+                    tvGoodNutrition.show()
+                    ivGoodNutritionDropDown.hide()
+                    ivGoodNutritionDropUp.show()
                 }
             }
 
             cvFavourite.setOnClickListener {
-                if (ivFavouriteOutline.visibility == View.VISIBLE){
-                    ivFavouriteOutline.visibility = View.INVISIBLE
-                    ivFavouriteFilled.visibility = View.VISIBLE
+                if (ivFavouriteOutline.visibility == View.VISIBLE) {
+                    ivFavouriteOutline.hide()
+                    ivFavouriteFilled.show()
                     savedRecipeData?.let { it1 -> recipeInformationViewModel.insertRecipe(it1) }
                     Snacker(binding.root, "Recipe added to favourites").success()
-                }
-                else{
-                    ivFavouriteOutline.visibility = View.VISIBLE
-                    ivFavouriteFilled.visibility = View.INVISIBLE
+                } else {
+                    ivFavouriteOutline.show()
+                    ivFavouriteFilled.hide()
                 }
             }
         }
@@ -150,18 +150,22 @@ class RecipeDescriptionBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDia
                 it.body()?.analyzedInstructions?.get(0)?.steps as MutableList<Step>
 
 
-            if(recipe.image.isEmpty()){
+            if (recipe.image.isEmpty()) {
                 Picasso.get().load(R.drawable.ic_placeholder).into(binding.ivDishImage)
-            }else{
+            } else {
                 Picasso.get().load(recipe.image).into(binding.ivDishImage)
             }
 
-            binding.tvReadyTime.text = "${it.body()?.readyInMinutes.toString()} min"
-            binding.tvServings.text = it.body()?.servings.toString()
-            binding.tvPrice.text = it.body()?.pricePerServing.toString()
-            binding.tvInstructions.text = it.body()?.instructions
-            binding.tvQuickSummary.text = it.body()?.summary
-
+            it.body()?.let { recipeInfo ->
+                binding.apply {
+                    tvReadyTime.text =
+                        getString(R.string.recipe_ready_time, recipeInfo.readyInMinutes)
+                    tvServings.text = recipeInfo.servings.toString()
+                    tvPrice.text = recipeInfo.pricePerServing.toString()
+                    tvInstructions.text = recipeInfo.instructions
+                    tvQuickSummary.text = recipeInfo.summary
+                }
+            }
             if (allIngredients == null) {
                 allIngredients = ArrayList()
             }
@@ -182,7 +186,7 @@ class RecipeDescriptionBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDia
                 }
             }
 
-            it.body()?.let {recipeData->
+            it.body()?.let { recipeData ->
                 savedRecipeData = SavedRecipeData(
                     id = recipeData.id,
                     image = recipeData.image,
@@ -198,7 +202,8 @@ class RecipeDescriptionBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDia
             }
 
 
-            ingredientsAdapter = IngredientsAdapter(requireContext(), removeDuplicates(allIngredients!!))
+            ingredientsAdapter =
+                IngredientsAdapter(requireContext(), removeDuplicates(allIngredients!!))
 
             binding.tvIngredientsText.visibility = View.VISIBLE
             var adapterIngredient = ingredientsAdapter
@@ -211,7 +216,8 @@ class RecipeDescriptionBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDia
             adapterIngredient.notifyDataSetChanged()
 
 
-            equipmentsAdapter = EquipmentsAdapter(requireContext(), removeDuplicates(allEquipments!!))
+            equipmentsAdapter =
+                EquipmentsAdapter(requireContext(), removeDuplicates(allEquipments!!))
 
             binding.tvEquipmentsText.visibility = View.VISIBLE
             var adapterEquipment = equipmentsAdapter

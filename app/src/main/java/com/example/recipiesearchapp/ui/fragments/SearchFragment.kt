@@ -11,11 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.recipiesearchapp.BuildConfig
 import com.example.recipiesearchapp.adapter.SearchItemAdapter
 import com.example.recipiesearchapp.databinding.FragmentSearchBinding
 import com.example.recipiesearchapp.models.RecipeDataBrief
 import com.example.recipiesearchapp.ui.viewmodels.SearchViewModel
-import com.example.recipiesearchapp.utils.Constants.Companion.API_KEY
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -56,7 +56,7 @@ class SearchFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
 
                 if (s?.length ?: 0 >= 3) {
-                    searchViewModel.getSearchData(API_KEY,s.toString())
+                    searchViewModel.getSearchData(BuildConfig.API_KEY,s.toString())
                 }
 
             }

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.recipiesearchapp.BuildConfig
 import com.example.recipiesearchapp.R
 import com.example.recipiesearchapp.adapter.AllRecipeAdapter
 import com.example.recipiesearchapp.adapter.PopularRecipeAdapter
@@ -16,7 +17,6 @@ import com.example.recipiesearchapp.databinding.FragmentHomeBinding
 import com.example.recipiesearchapp.models.Recipe
 import com.example.recipiesearchapp.models.RecipeDataBrief
 import com.example.recipiesearchapp.ui.viewmodels.HomeViewModel
-import com.example.recipiesearchapp.utils.Constants.Companion.API_KEY
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,8 +39,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initClicks()
         attachObservers()
-        homeViewModel.getPopularRecipeData(API_KEY,"10")
-        homeViewModel.getAllRecipeData(API_KEY)
+        homeViewModel.getPopularRecipeData(BuildConfig.API_KEY,"10")
+        homeViewModel.getAllRecipeData(BuildConfig.API_KEY)
     }
 
     private fun initClicks() {

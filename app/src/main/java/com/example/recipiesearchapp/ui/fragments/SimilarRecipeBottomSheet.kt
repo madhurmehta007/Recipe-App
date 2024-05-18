@@ -8,12 +8,12 @@ import android.widget.FrameLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.recipiesearchapp.BuildConfig
 import com.example.recipiesearchapp.adapter.SimilarRecipeAdapter
 import com.example.recipiesearchapp.databinding.FragmentSimilarRecipeBottomSheetBinding
 import com.example.recipiesearchapp.models.RecipeDataBrief
 import com.example.recipiesearchapp.models.SimilarRecipeItem
 import com.example.recipiesearchapp.ui.viewmodels.SimilarRecipeViewModel
-import com.example.recipiesearchapp.utils.Constants.Companion.API_KEY
 import com.example.recipiesearchapp.utils.GenericUtils
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -41,7 +41,7 @@ class SimilarRecipeBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialogF
 
         initClicks()
         attachObservers()
-        similarRecipeViewModel.getSimilarRecipeData(recipe.id.toString(),API_KEY)
+        similarRecipeViewModel.getSimilarRecipeData(recipe.id.toString(),BuildConfig.API_KEY)
     }
 
     private fun initClicks(){
