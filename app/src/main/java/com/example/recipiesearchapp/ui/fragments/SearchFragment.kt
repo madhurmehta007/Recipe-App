@@ -55,7 +55,7 @@ class SearchFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable?) {
 
-                if (s?.length ?: 0 >= 3) {
+                if ((s?.length ?: 0) >= 3) {
                     searchViewModel.getSearchData(BuildConfig.API_KEY,s.toString())
                 }
 
@@ -71,13 +71,11 @@ class SearchFragment : Fragment() {
 
                 searchItemAdapter = SearchItemAdapter(requireContext(),searchData)
 
-                var adapter = searchItemAdapter
+                val adapter = searchItemAdapter
 
-                adapter.notifyDataSetChanged()
                 binding.rvSearchResult.setHasFixedSize(true)
                 binding.rvSearchResult.adapter = adapter
                 binding.rvSearchResult.layoutManager = LinearLayoutManager(context)
-                adapter.notifyDataSetChanged()
 
                 searchItemAdapter.onItemClick = {
                     val dialog = RecipeIntroBottomSheet(it)

@@ -30,7 +30,7 @@ import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RecipeDescriptionBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialogFragment() {
+class RecipeDescriptionBottomSheet(val recipe: RecipeDataBrief,val allRecipeData:List<SavedRecipeData>? = null) : BottomSheetDialogFragment() {
     private var _binding: FragmentRecipeDescriptionBottomSheetBinding? = null
     private val binding
         get() = _binding!!
@@ -38,7 +38,7 @@ class RecipeDescriptionBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDia
     private var allIngredients: ArrayList<Ingredient>? = null
     private var allEquipments: ArrayList<Equipment>? = null
 
-    val recipeInformationViewModel: RecipeDescriptionViewModel by viewModels<RecipeDescriptionViewModel>()
+    private val recipeInformationViewModel: RecipeDescriptionViewModel by viewModels<RecipeDescriptionViewModel>()
     private lateinit var equipmentsAdapter: EquipmentsAdapter
     private lateinit var ingredientsAdapter: IngredientsAdapter
 
@@ -56,7 +56,53 @@ class RecipeDescriptionBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDia
         super.onViewCreated(view, savedInstanceState)
         initClicks()
         attachObservers()
-        recipeInformationViewModel.getRecipeInformation(recipe.id.toString(), BuildConfig.API_KEY)
+        setViews()
+    }
+
+    private fun setViews() {
+        allRecipeData?.find { it.id == recipe.id }?.let {
+
+            ingredientsAdapter =
+                IngredientsAdapter(requireContext(), removeDuplicates(it.ingredients))
+
+            binding.tvIngredientsText.visibility = View.VISIBLE
+            val adapterIngredient = ingredientsAdapter
+
+            binding.rvIngredients.setHasFixedSize(true)
+            binding.rvIngredients.adapter = adapterIngredient
+            binding.rvIngredients.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+
+            equipmentsAdapter =
+                EquipmentsAdapter(requireContext(), removeDuplicates(it.equipment))
+
+            binding.tvEquipmentsText.visibility = View.VISIBLE
+            var adapterEquipment = equipmentsAdapter
+
+            binding.rvEquipments.setHasFixedSize(true)
+            binding.rvEquipments.adapter = adapterEquipment
+            binding.rvEquipments.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+            if (recipe.image.isEmpty()) {
+                Picasso.get().load(R.drawable.ic_placeholder).into(binding.ivDishImage)
+            } else {
+                Picasso.get().load(it.image).into(binding.ivDishImage)
+            }
+
+            binding.apply {
+                tvReadyTime.text =
+                    getString(R.string.recipe_ready_time, it.readyInMinutes)
+                tvServings.text = it.servings.toString()
+                tvPrice.text = it.pricePerServing.toString()
+                tvInstructions.text = it.instructions
+                tvQuickSummary.text = it.summary
+            }
+
+        } ?: run {
+            recipeInformationViewModel.getRecipeInformation(recipe.id.toString(), BuildConfig.API_KEY)
+        }
     }
 
     private fun initClicks() {
@@ -197,7 +243,7 @@ class RecipeDescriptionBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDia
                     title = recipeData.title,
                     equipment = allEquipments!!,
                     ingredients = allIngredients!!,
-                    pricePerServing = recipeData.pricePerServing
+                    pricePerServing = recipeData.pricePerServing,
                 )
             }
 
@@ -206,29 +252,23 @@ class RecipeDescriptionBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDia
                 IngredientsAdapter(requireContext(), removeDuplicates(allIngredients!!))
 
             binding.tvIngredientsText.visibility = View.VISIBLE
-            var adapterIngredient = ingredientsAdapter
+            val adapterIngredient = ingredientsAdapter
 
-            adapterIngredient.notifyDataSetChanged()
             binding.rvIngredients.setHasFixedSize(true)
             binding.rvIngredients.adapter = adapterIngredient
             binding.rvIngredients.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapterIngredient.notifyDataSetChanged()
-
 
             equipmentsAdapter =
                 EquipmentsAdapter(requireContext(), removeDuplicates(allEquipments!!))
 
             binding.tvEquipmentsText.visibility = View.VISIBLE
-            var adapterEquipment = equipmentsAdapter
+            val adapterEquipment = equipmentsAdapter
 
-            adapterEquipment.notifyDataSetChanged()
             binding.rvEquipments.setHasFixedSize(true)
             binding.rvEquipments.adapter = adapterEquipment
             binding.rvEquipments.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapterEquipment.notifyDataSetChanged()
-
 
             binding.cvFavourite.show()
         })

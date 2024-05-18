@@ -84,13 +84,11 @@ class RecipeIngredientsBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDia
             ingredientsAdapter =
                 IngredientsAdapter(requireContext(), removeDuplicates(allIngredients!!))
 
-            var adapter = ingredientsAdapter
+            val adapter = ingredientsAdapter
 
-            adapter.notifyDataSetChanged()
             binding.rvIngredients.setHasFixedSize(true)
             binding.rvIngredients.adapter = adapter
             binding.rvIngredients.layoutManager = GridLayoutManager(context, 3)
-            adapter.notifyDataSetChanged()
 
         })
     }

@@ -26,7 +26,6 @@ class FavouriteFragment : Fragment() {
         FragmentFavouriteBinding.inflate(layoutInflater)
     }
     private lateinit var favouriteRecipeAdapter: FavouriteRecipeAdapter
-    private val viewModel: FavouriteViewModel by viewModels()
     private val recipeDescriptionViewModel: RecipeDescriptionViewModel by viewModels<RecipeDescriptionViewModel>()
 
 
@@ -77,7 +76,7 @@ class FavouriteFragment : Fragment() {
             }
 
             favouriteRecipeAdapter = FavouriteRecipeAdapter(requireContext(), savedRecipeData,onItemClick = {
-                val dialog = RecipeDescriptionBottomSheet(it)
+                val dialog = RecipeDescriptionBottomSheet(it,savedRecipeDataList)
                 dialog.isCancelable = true
                 dialog.show(parentFragmentManager,"RecipeDescriptionBottomSheet")
             })

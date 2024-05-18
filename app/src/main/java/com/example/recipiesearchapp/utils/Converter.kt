@@ -1,6 +1,7 @@
 package com.example.recipiesearchapp.utils
 
 import androidx.room.TypeConverter
+import com.example.recipiesearchapp.models.AnalyzedInstruction
 import com.example.recipiesearchapp.models.Equipment
 import com.example.recipiesearchapp.models.Ingredient
 import com.google.gson.Gson
@@ -35,5 +36,6 @@ class Converter {
         val type = object : TypeToken<ArrayList<Ingredient>>() {}.type
         return gson.fromJson(value, type)
     }
+
 
 }

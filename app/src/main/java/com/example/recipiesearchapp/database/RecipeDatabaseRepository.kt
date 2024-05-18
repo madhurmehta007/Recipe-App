@@ -7,8 +7,7 @@ import com.example.recipiesearchapp.models.SavedRecipeData
 import javax.inject.Inject
 
 class RecipeDatabaseRepository@Inject constructor(
-    private val recipeDatabase: RecipeDatabase,
-//    private val savedRecipe:SavedRecipeData
+    private val recipeDatabase: RecipeDatabase
 ) {
     private val recipeDao = recipeDatabase.recipeDao()
 
