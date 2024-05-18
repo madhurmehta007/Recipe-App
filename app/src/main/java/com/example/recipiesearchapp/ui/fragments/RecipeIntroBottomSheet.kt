@@ -1,6 +1,5 @@
 package com.example.recipiesearchapp.ui.fragments
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +13,7 @@ import com.example.recipiesearchapp.databinding.FragmentRecipeIntroBottomSheetBi
 import com.example.recipiesearchapp.models.RecipeDataBrief
 import com.example.recipiesearchapp.ui.viewmodels.RecipeDescriptionViewModel
 import com.example.recipiesearchapp.utils.GenericUtils
+import com.example.recipiesearchapp.utils.GenericUtils.Companion.replaceChildFragmentWithAnimation
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
@@ -22,17 +22,16 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RecipeIntroBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialogFragment() {
 
-    private var _binding: FragmentRecipeIntroBottomSheetBinding? = null
-    private val binding
-        get() = _binding!!
-    val recipeInformationViewModel: RecipeDescriptionViewModel by viewModels<RecipeDescriptionViewModel>()
-//    private lateinit var ingredientsAdapter: IngredientsAdapter
+    private val binding: FragmentRecipeIntroBottomSheetBinding by lazy {
+        FragmentRecipeIntroBottomSheetBinding.inflate(layoutInflater)
+    }
+
+    private val recipeInformationViewModel: RecipeDescriptionViewModel by viewModels<RecipeDescriptionViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentRecipeIntroBottomSheetBinding.inflate(inflater, container, false)
+    ): View {
 
         return binding.root
     }
@@ -45,15 +44,17 @@ class RecipeIntroBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialogFra
     }
 
     private fun initClicks(){
-        binding.btnGetIngredients.setOnClickListener {
-            val dialog = RecipeIngredientsBottomSheet(recipe)
-            dialog.isCancelable = true
-            dialog.show(parentFragmentManager,"RecipeIngredientsBottomSheet")
+        binding.apply {
+            btnGetIngredients.setOnClickListener {
+                replaceChildFragmentWithAnimation(RecipeIngredientsBottomSheet(recipe), R.id.fcv_recipe_intro)
+            }
 
+        ivArrowLeft.setOnClickListener{
+            dismiss()
         }
-
-
+        }
     }
+
 
     private fun attachObservers(){
         recipeInformationViewModel.recipeInformationResponse.observe(viewLifecycleOwner, Observer {
@@ -79,7 +80,7 @@ class RecipeIntroBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialogFra
                 it.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout
             val behavior = BottomSheetBehavior.from(bottomSheet)
             behavior.state = BottomSheetBehavior.STATE_EXPANDED
-            GenericUtils.setPeekHeight(0.9, binding.bottomSheet, requireActivity())
+            GenericUtils.setPeekHeight(0.95, binding.bottomSheet, requireActivity())
             binding.bottomSheet.requestLayout()
         }
     }

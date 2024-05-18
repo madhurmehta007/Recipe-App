@@ -22,17 +22,17 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SimilarRecipeBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialogFragment() {
 
-    private var _binding: FragmentSimilarRecipeBottomSheetBinding? = null
-    private val binding
-        get() = _binding!!
-    val similarRecipeViewModel:SimilarRecipeViewModel by viewModels<SimilarRecipeViewModel>()
+    private val binding: FragmentSimilarRecipeBottomSheetBinding by lazy {
+        FragmentSimilarRecipeBottomSheetBinding.inflate(layoutInflater)
+    }
+
+    private val similarRecipeViewModel:SimilarRecipeViewModel by viewModels<SimilarRecipeViewModel>()
     private lateinit var similarRecipeAdapter: SimilarRecipeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentSimilarRecipeBottomSheetBinding.inflate(inflater, container, false)
+    ): View {
         return binding.root
     }
 
@@ -45,7 +45,9 @@ class SimilarRecipeBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialogF
     }
 
     private fun initClicks(){
-
+        binding.ivSimilarRecipeDropDown.setOnClickListener{
+            dismiss()
+        }
     }
 
     private fun attachObservers(){
@@ -54,14 +56,11 @@ class SimilarRecipeBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialogF
 
             if (similarRecipeData?.isNotEmpty() == true){
                 similarRecipeAdapter = SimilarRecipeAdapter(requireContext(), similarRecipeData)
-                var adapter = similarRecipeAdapter
+                val adapter = similarRecipeAdapter
 
-                adapter.notifyDataSetChanged()
                 binding.rvSimilarRecipes.setHasFixedSize(true)
                 binding.rvSimilarRecipes.adapter = adapter
                 binding.rvSimilarRecipes.layoutManager = LinearLayoutManager(context)
-                adapter.notifyDataSetChanged()
-
             }
         })
     }
@@ -73,8 +72,6 @@ class SimilarRecipeBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialogF
                 it.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout
             val behavior = BottomSheetBehavior.from(bottomSheet)
             behavior.state = BottomSheetBehavior.STATE_EXPANDED
-            GenericUtils.setPeekHeight(0.75, binding.bottomSheet, requireActivity())
-            binding.bottomSheet.requestLayout()
         }
     }
 

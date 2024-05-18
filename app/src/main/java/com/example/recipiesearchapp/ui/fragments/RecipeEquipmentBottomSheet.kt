@@ -9,34 +9,37 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipiesearchapp.BuildConfig
+import com.example.recipiesearchapp.R
 import com.example.recipiesearchapp.adapter.EquipmentsAdapter
 import com.example.recipiesearchapp.databinding.FragmentRecipeEquipmentBottomSheetBinding
+import com.example.recipiesearchapp.databinding.FragmentSimilarRecipeBottomSheetBinding
 import com.example.recipiesearchapp.models.Equipment
 import com.example.recipiesearchapp.models.RecipeDataBrief
 import com.example.recipiesearchapp.models.Step
 import com.example.recipiesearchapp.ui.viewmodels.RecipeDescriptionViewModel
-import com.example.recipiesearchapp.utils.Constants
 import com.example.recipiesearchapp.utils.GenericUtils
+import com.example.recipiesearchapp.utils.GenericUtils.Companion.hide
+import com.example.recipiesearchapp.utils.GenericUtils.Companion.replaceChildFragmentWithAnimation
+import com.example.recipiesearchapp.utils.GenericUtils.Companion.show
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RecipeEquipmentBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialogFragment() {
-    private var _binding: FragmentRecipeEquipmentBottomSheetBinding? = null
-    private val binding
-        get() = _binding!!
 
-    val recipeInformationViewModel: RecipeDescriptionViewModel by viewModels<RecipeDescriptionViewModel>()
+    private val binding: FragmentRecipeEquipmentBottomSheetBinding by lazy {
+        FragmentRecipeEquipmentBottomSheetBinding.inflate(layoutInflater)
+    }
+
+    private val recipeInformationViewModel: RecipeDescriptionViewModel by viewModels<RecipeDescriptionViewModel>()
     private lateinit var equipmentsAdapter: EquipmentsAdapter
     private var allEquipments: ArrayList<Equipment>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentRecipeEquipmentBottomSheetBinding.inflate(inflater, container, false)
-
+    ): View {
         return binding.root
     }
 
@@ -48,85 +51,91 @@ class RecipeEquipmentBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialo
         recipeInformationViewModel.getRecipeInformation(recipe.id.toString(), BuildConfig.API_KEY)
     }
 
-    private fun initClicks(){
+    private fun initClicks() {
         binding.apply {
             cvDropDown.setOnClickListener {
                 if (tvNutrition.visibility == View.VISIBLE) {
-                    tvNutrition.visibility = View.GONE
-                    ivArrowDropDown.visibility = View.VISIBLE
-                    ivArrowDropUp.visibility = View.GONE
+                    tvNutrition.hide()
+                    ivArrowDropDown.show()
+                    ivArrowDropUp.hide()
                 } else {
-                    tvNutrition.visibility = View.VISIBLE
-                    ivArrowDropDown.visibility = View.GONE
-                    ivArrowDropUp.visibility = View.VISIBLE
+                    tvNutrition.show()
+                    ivArrowDropDown.hide()
+                    ivArrowDropUp.show()
                 }
             }
             clNutrition.setOnClickListener {
                 if (tvNutrition.visibility == View.VISIBLE) {
-                    tvNutrition.visibility = View.GONE
-                    ivArrowDropDown.visibility = View.VISIBLE
-                    ivArrowDropUp.visibility = View.GONE
+                    tvNutrition.hide()
+                    ivArrowDropDown.show()
+                    ivArrowDropUp.hide()
                 } else {
-                    tvNutrition.visibility = View.VISIBLE
-                    ivArrowDropDown.visibility = View.GONE
-                    ivArrowDropUp.visibility = View.VISIBLE
+                    tvNutrition.show()
+                    ivArrowDropDown.hide()
+                    ivArrowDropUp.show()
                 }
             }
             cvBadNutritionDropDown.setOnClickListener {
                 if (tvBadNutrition.visibility == View.VISIBLE) {
-                    tvBadNutrition.visibility = View.GONE
-                    ivBadNutritionDropDown.visibility = View.VISIBLE
-                    ivBadNutritionDropUp.visibility = View.GONE
+                    tvBadNutrition.hide()
+                    ivBadNutritionDropDown.show()
+                    ivBadNutritionDropUp.hide()
                 } else {
-                    tvBadNutrition.visibility = View.VISIBLE
-                    ivBadNutritionDropDown.visibility = View.GONE
-                    ivBadNutritionDropUp.visibility = View.VISIBLE
+                    tvBadNutrition.show()
+                    ivBadNutritionDropDown.hide()
+                    ivBadNutritionDropUp.show()
                 }
             }
             clBadHealthNutrition.setOnClickListener {
                 if (tvBadNutrition.visibility == View.VISIBLE) {
-                    tvBadNutrition.visibility = View.GONE
-                    ivBadNutritionDropDown.visibility = View.VISIBLE
-                    ivBadNutritionDropUp.visibility = View.GONE
+                    tvBadNutrition.hide()
+                    ivBadNutritionDropDown.show()
+                    ivBadNutritionDropUp.hide()
                 } else {
-                    tvBadNutrition.visibility = View.VISIBLE
-                    ivBadNutritionDropDown.visibility = View.GONE
-                    ivBadNutritionDropUp.visibility = View.VISIBLE
+                    tvBadNutrition.show()
+                    ivBadNutritionDropDown.hide()
+                    ivBadNutritionDropUp.show()
                 }
             }
             cvGoodNutritionDropDown.setOnClickListener {
                 if (tvGoodNutrition.visibility == View.VISIBLE) {
-                    tvGoodNutrition.visibility = View.GONE
-                    ivGoodNutritionDropDown.visibility = View.VISIBLE
-                    ivGoodNutritionDropUp.visibility = View.GONE
+                    tvGoodNutrition.hide()
+                    ivGoodNutritionDropDown.show()
+                    ivGoodNutritionDropUp.hide()
                 } else {
-                    tvGoodNutrition.visibility = View.VISIBLE
-                    ivGoodNutritionDropDown.visibility = View.GONE
-                    ivGoodNutritionDropUp.visibility = View.VISIBLE
+                    tvGoodNutrition.show()
+                    ivGoodNutritionDropDown.hide()
+                    ivGoodNutritionDropUp.show()
                 }
             }
             clGoodHealthNutrition.setOnClickListener {
                 if (tvGoodNutrition.visibility == View.VISIBLE) {
-                    tvGoodNutrition.visibility = View.GONE
-                    ivGoodNutritionDropDown.visibility = View.VISIBLE
-                    ivGoodNutritionDropUp.visibility = View.GONE
+                    tvGoodNutrition.hide()
+                    ivGoodNutritionDropDown.show()
+                    ivGoodNutritionDropUp.hide()
                 } else {
-                    tvGoodNutrition.visibility = View.VISIBLE
-                    ivGoodNutritionDropDown.visibility = View.GONE
-                    ivGoodNutritionDropUp.visibility = View.VISIBLE
+                    tvGoodNutrition.show()
+                    ivGoodNutritionDropDown.hide()
+                    ivGoodNutritionDropUp.show()
                 }
             }
 
-        }
+            btnGetSimilarRecipe.setOnClickListener {
+                fcvRecipeEquipment.show()
+                replaceChildFragmentWithAnimation(SimilarRecipeBottomSheet(recipe), R.id.fcv_recipe_equipment)
+            }
 
-        binding.btnGetSimilarRecipe.setOnClickListener {
-            val dialog = SimilarRecipeBottomSheet(recipe)
-            dialog.isCancelable = true
-            dialog.show(parentFragmentManager,"SimilarRecipeBottomSheet")
+            ivEquipmentDropDown.setOnClickListener{
+                fcvRecipeEquipment.hide()
+            }
+
+            tvFullRecipe.setOnClickListener {
+                fcvRecipeEquipment.hide()
+            }
         }
     }
 
-    private fun attachObservers(){
+    private fun attachObservers() {
         recipeInformationViewModel.recipeInformationResponse.observe(viewLifecycleOwner, Observer {
 
             val steps: MutableList<Step> =
@@ -142,18 +151,17 @@ class RecipeEquipmentBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialo
                 }
             }
 
-            equipmentsAdapter = EquipmentsAdapter(requireContext(),
+            equipmentsAdapter = EquipmentsAdapter(
+                requireContext(),
                 GenericUtils.removeDuplicates(allEquipments!!)
             )
 
-            var adapterEquipment = equipmentsAdapter
+            val adapterEquipment = equipmentsAdapter
 
-            adapterEquipment.notifyDataSetChanged()
             binding.rvEquipments.setHasFixedSize(true)
             binding.rvEquipments.adapter = adapterEquipment
             binding.rvEquipments.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapterEquipment.notifyDataSetChanged()
         })
     }
 
@@ -164,8 +172,6 @@ class RecipeEquipmentBottomSheet(val recipe: RecipeDataBrief) : BottomSheetDialo
                 it.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout
             val behavior = BottomSheetBehavior.from(bottomSheet)
             behavior.state = BottomSheetBehavior.STATE_EXPANDED
-            GenericUtils.setPeekHeight(0.79, binding.bottomSheet, requireActivity())
-            binding.bottomSheet.requestLayout()
         }
     }
 }
