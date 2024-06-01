@@ -37,10 +37,7 @@ Once the sync is complete, you can run the application on an Android emulator or
 <td><img src=https://github.com/madhurmehta007/Nosh-Assignment/assets/77354138/5f49b3c6-215b-4f32-8e92-53822c81f043.jpeg width=340 height=620></td>
 <td><img src=https://github.com/madhurmehta007/Nosh-Assignment/assets/77354138/4d5f60fa-bf8a-466b-a7d1-6ad1e61703c8.jpeg width=340 height=620></td>
 
-  <!-- <tr>
-<td><img src=https://github.com/madhurmehta007/Nosh-Assignment/assets/77354138/541391ef-5e23-4aa4-867f-7ac2ef1248fa.jpeg width=340 height=620></td>
-<td><img src=https://github.com/madhurmehta007/Nosh-Assignment/assets/77354138/5f49b3c6-215b-4f32-8e92-53822c81f043.jpeg width=340 height=620></td>
-<td><img src=https://github.com/madhurmehta007/Nosh-Assignment/assets/77354138/4d5f60fa-bf8a-466b-a7d1-6ad1e61703c8.jpeg width=340 height=620></td> -->
+
 </table>
 
 
